@@ -6,7 +6,7 @@
 /*   By: ecabanas <ecabanas@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/02 12:05:14 by ecabanas          #+#    #+#             */
-/*   Updated: 2022/10/02 12:09:01 by ecabanas         ###   ########.fr       */
+/*   Updated: 2022/10/02 13:39:16 by ecabanas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include "../libft/libft.h"
 # include <unistd.h>
-# include <stdlib.h>
+# include <signal.h>
 
 /*	server.c	*/
 
