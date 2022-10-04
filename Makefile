@@ -28,9 +28,10 @@ all: $(NAME)
 $(NAME): $(OBJ)
 		$(MAKE) -C libft all
 		cp libft/libft.a $(NAME)
+		$(main)
+main: $(NAME)
 		$(CC) $(CFLAGS) -I $(HEADER) $(OBJ) -o $(NAME) -L libft -lft
 		./$(NAME)
-
 clean:
 	$(MAKE) -C libft all clean
 	$(RM) $(OBJ) $(DEPS_DEL)
