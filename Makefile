@@ -10,36 +10,41 @@
 #                                                                              #
 # **************************************************************************** #
 
-NAME	=	minitalk
-SRC		=	src/server.c
-OBJ		=	$(SRC:.c=.o)
-HEADER	=	./includes/minitalk.h
-DEPS	=	$(addsuffix .d, $(basename $(notdir $(SRC))))	
+NAME		=	minitalk
+SRC_CLIENT	=	src/client.c
+SRC_SERVER	=	src/server.c
+OBJ_CLIENT	=	$(SRC_CLIENT:.c=.o)
+OBJ_SERVER	=	$(SRC_SERVER:.c=.o)
+HEADER		=	includes/minitalk.h
+DEPS		=	$(addsuffix .d, $(basename $(notdir $(SRC))))	
 
 CC		=	gcc
-CFLAGS	=	-Wall -Werror -Wextra -MMD
+CFLAGS		=	-Wall -Werror -Wextra -MMD
+AFLAGS		=	-L libft -lft
 RM		=	rm -f
-DEPS_DEL = ./*.d ./src/*.d
+DEPS_DEL 	= 	./*.d ./src/*.d
 
 #######################################################################################################################################
-all: $(NAME)
+all: libft server client
 
--include $(DEPS)
-$(NAME): $(OBJ)
-		$(MAKE) -C libft all
-		cp libft/libft.a $(NAME)
-		$(main)
-main: $(NAME)
-		$(CC) $(CFLAGS) -I $(HEADER) $(OBJ) -o $(NAME) -L libft -lft
-		./$(NAME)
+libft:
+	make -C libft
+
+
+server: $(OBJ_SERVER) $(HEADER)
+	$(CC) $(CFLAGS) -I $(HEADER) $(OBJ_SERVER) $(AFLAGS) -o server
+
+client: $(OBJ_CLIENT) $(HEADER)
+	$(CC) $(CFLAGS) -I $(HEADER) $(OBJ_CLIENT) $(AFLAGS) -o client
+
 clean:
-	$(MAKE) -C libft all clean
-	$(RM) $(OBJ) $(DEPS_DEL)
+	make -C libft all clean
+	$(RM) $(OBJ_SERVER) $(OBJ_CLIENT) $(DEPS_DEL)
 
 fclean: clean
-	$(MAKE) -C libft fclean
-	$(RM) $(NAME)
+	make -C libft fclean
+	$(RM) -rdf client server
 
 re: fclean all
 
-.PHONY: all clean fclean re
+.PHONY: libft all clean fclean re
