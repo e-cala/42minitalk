@@ -6,13 +6,13 @@
 #    By: ecabanas <ecabanas@student.42barcel>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/02 12:15:19 by ecabanas          #+#    #+#              #
-#    Updated: 2022/10/02 13:40:02 by ecabanas         ###   ########.fr        #
+#    Updated: 2022/10/07 18:34:19 by ecabanas         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		=	minitalk
-SRC_CLIENT	=	src/client.c
-SRC_SERVER	=	src/server.c
+SRC_CLIENT	=	src/client.c src/utils.c
+SRC_SERVER	=	src/server.c src/utils.c
 OBJ_CLIENT	=	$(SRC_CLIENT:.c=.o)
 OBJ_SERVER	=	$(SRC_SERVER:.c=.o)
 HEADER		=	includes/minitalk.h

@@ -1,23 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minitalk.h                                         :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ecabanas <ecabanas@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/02 12:05:14 by ecabanas          #+#    #+#             */
-/*   Updated: 2022/10/07 18:37:15 by ecabanas         ###   ########.fr       */
+/*   Created: 2022/10/07 16:12:09 by ecabanas          #+#    #+#             */
+/*   Updated: 2022/10/07 16:17:49 by ecabanas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINITALK_H
-# define MINITALK_H
+#include "../includes/minitalk.h"
 
-# include "../libft/libft.h"
-# include <unistd.h>
-# include <signal.h>
-
-/*	utils.c		*/
-void	err_message(void);
-
-#endif
+void	err_message()
+{
+	ft_putendl_fd("An error has ocurred", 1);
+	exit(EXIT_FAILURE);
+}
