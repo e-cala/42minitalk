@@ -6,7 +6,7 @@
 /*   By: ecabanas <ecabanas@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/07 17:24:33 by ecabanas          #+#    #+#             */
-/*   Updated: 2022/10/07 18:26:35 by ecabanas         ###   ########.fr       */
+/*   Updated: 2022/10/07 18:48:07 by ecabanas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static void	my_handler(int sig, siginfo_t *info, void *context)
 {
 	static unsigned char	c;
-	static size_t	size;
+	static size_t			size;
 
 	(void) context;
 	if (sig == SIGUSR2)
@@ -39,13 +39,13 @@ static void	my_handler(int sig, siginfo_t *info, void *context)
 	}
 }
 
-static void	show_pid()
+static void	show_pid(void)
 {
 	pid_t	pid;
 
 	pid = getpid();
 	ft_putstr_fd("PID: ", 1);
-	ft_putnbr_fd(pid ,1);
+	ft_putnbr_fd(pid, 1);
 	ft_putchar_fd('\n', 1);
 }
 
@@ -59,8 +59,7 @@ int	main(void)
 	act.sa_sigaction = my_handler;
 	act.sa_flags = SA_SIGINFO;
 	sigaction(SIGUSR1, &act, NULL);
-
-	while(1)
+	while (1)
 	{
 		if (sigaction(SIGUSR1, &act, NULL) < 0 || sigaction(SIGUSR2, &act, NULL) < 0)
 			err_message();

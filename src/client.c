@@ -6,7 +6,7 @@
 /*   By: ecabanas <ecabanas@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/07 17:48:09 by ecabanas          #+#    #+#             */
-/*   Updated: 2022/10/07 18:30:47 by ecabanas         ###   ########.fr       */
+/*   Updated: 2022/10/07 18:40:28 by ecabanas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static void	encode(char *str, pid_t pid)
 		{
 			bits--;
 			if (((unsigned char)str[i] >> bits & 1) == 1)
-		   		kill(pid, SIGUSR1);
+				kill(pid, SIGUSR1);
 			else if (((unsigned char)str[i] >> bits & 1) == 0)
 				kill(pid, SIGUSR2);
 			usleep(100);
@@ -41,7 +41,6 @@ static void	show_message(pid_t pid)
 	ft_putstr_fd("Sending data to: ", 1);
 	ft_putnbr_fd(pid, 1);
 	ft_putendl_fd("..", 1);
-
 }
 
 int	main(int argc, char *argv[])
@@ -53,7 +52,7 @@ int	main(int argc, char *argv[])
 	pid = ft_atoi(argv[1]);
 	show_message(pid);
 	if (!pid)
-		err_message();	
+		err_message();
 	encode(argv[2], pid);
 	while (1)
 		usleep(100);
