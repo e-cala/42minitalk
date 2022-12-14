@@ -6,7 +6,7 @@
 /*   By: ecabanas <ecabanas@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/02 12:05:14 by ecabanas          #+#    #+#             */
-/*   Updated: 2022/10/02 13:39:16 by ecabanas         ###   ########.fr       */
+/*   Updated: 2022/10/07 18:37:15 by ecabanas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include <unistd.h>
 # include <signal.h>
 
-/*	server.c	*/
-
+/*	utils.c		*/
+void	err_message(void);
 
 #endif
