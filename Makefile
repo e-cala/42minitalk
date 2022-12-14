@@ -32,13 +32,13 @@ libft:
 
 
 server: $(OBJ_SERVER) $(HEADER)
-	$(CC) $(CFLAGS) -I $(HEADER) $(OBJ_SERVER) $(AFLAGS) -o server
+	$(CC) $(CFLAGS) -I $(HEADER) $< $(AFLAGS) -o server
 
 client: $(OBJ_CLIENT) $(HEADER)
-	$(CC) $(CFLAGS) -I $(HEADER) $(OBJ_CLIENT) $(AFLAGS) -o client
+	$(CC) $(CFLAGS) -I $(HEADER) $< $(AFLAGS) -o client
 
 clean:
-	make -C libft all clean
+	make -C libft clean
 	$(RM) $(OBJ_SERVER) $(OBJ_CLIENT) $(DEPS_DEL)
 
 fclean: clean
