@@ -12,32 +12,8 @@
 
 #include "../includes/minitalk.h"
 
-void    encode(int pid, char *str)
+void	encode(int pid, char *str)
 {
-<<<<<<< HEAD
-        int i;
-        int bits;
-
-        i = 0;
-        while (str[i])
-        {
-            bits = 8;
-            while (bits != 0)
-            {
-                bits--;
-                if ((str[i] >> bits & 1) == 0)
-                    kill(pid, SIGUSR2);
-                else if ((str[i] >> bits & 1) == 1)
-                    kill(pid, SIGUSR1);
-                usleep(500);
-            }
-            i++;
-        }     
-}
-
-
-int main(int argc, char *argv[])
-=======
 	size_t	i;
 	size_t	bits;
 	size_t	len;
@@ -60,41 +36,16 @@ int main(int argc, char *argv[])
 	}
 }
 
-static void	show_message(pid_t pid)
-{
-	ft_putstr_fd("Sending data to: ", 1);
-	ft_putnbr_fd(pid, 1);
-	ft_putendl_fd("..", 1);
-}
-
 int	main(int argc, char *argv[])
->>>>>>> 101c215c00472e88295e7e73f863096f19c82c18
 {
-    pid_t   pid;
+	pid_t	pid;
 
-<<<<<<< HEAD
-    if (argc != 3)
-        return (0);
-    pid = ft_atoi(argv[1]);
-    if (!pid)
-    {
-        ft_putendl_fd("An error has ocurred", 1);
-        exit(EXIT_FAILURE);
-    }
-    encode(pid, argv[2]);
-
-    return (0);
-}
-=======
 	if (argc != 3)
 		return (0);
-	pid = ft_atoi(argv[1]);
-	show_message(pid);
+	if (!ft_atoi(argv[1], &pid))
+		err_message("Wrong pid argument");
 	if (!pid)
-		err_message();
-	encode(argv[2], pid);
-	while (1)
-		usleep(100);
+		err_message("pid not provided");
+	encode(pid, argv[2]);
 	return (0);
 }
->>>>>>> 101c215c00472e88295e7e73f863096f19c82c18

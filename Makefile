@@ -18,10 +18,10 @@ OBJ_SERVER	=	$(SRC_SERVER:.c=.o)
 HEADER		=	includes/minitalk.h
 DEPS		=	$(addsuffix .d, $(basename $(notdir $(SRC))))	
 
-CC		=	gcc
+CC			=	gcc
 CFLAGS		=	-Wall -Werror -Wextra -MMD
 AFLAGS		=	-L libft -lft
-RM		=	rm -f
+RM			=	rm -f
 DEPS_DEL 	= 	./*.d ./src/*.d
 
 #######################################################################################################################################
@@ -32,10 +32,10 @@ libft:
 
 
 server: $(OBJ_SERVER) $(HEADER)
-	$(CC) $(CFLAGS) -I $(HEADER) $< $(AFLAGS) -o server
+	$(CC) $(CFLAGS) -I $(HEADER) $(OBJ_SERVER) $(AFLAGS) -o $@
 
 client: $(OBJ_CLIENT) $(HEADER)
-	$(CC) $(CFLAGS) -I $(HEADER) $< $(AFLAGS) -o client
+	$(CC) $(CFLAGS) -I $(HEADER) $(OBJ_CLIENT) $(AFLAGS) -o $@
 
 clean:
 	make -C libft clean
