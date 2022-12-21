@@ -6,7 +6,7 @@
 #    By: ecabanas <ecabanas@student.42barcel>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/02 12:15:19 by ecabanas          #+#    #+#              #
-#    Updated: 2022/10/07 18:34:19 by ecabanas         ###   ########.fr        #
+#    Updated: 2022/12/21 20:02:05 by ecabanas         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,6 +44,9 @@ clean:
 fclean: clean
 	make -C libft fclean
 	$(RM) -rdf client server
+
+tests: server client
+	bash -c "sh tests/tests.sh"
 
 re: fclean all
 

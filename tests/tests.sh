@@ -2,6 +2,7 @@
 
 #ARG=$(pidof ./server)
 ARG=$(pgrep -u ecabanas server)
+TIME=time.txt
 cien="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut in nulla sed orci sagittis lacinia vel ac orci. Proin 
 finibus semper tellus, nec vestibulum libero hendrerit nec. Integer vitae massa at est lobortis pulvinar at eget leo. 
 Nullam eu mauris in dolor ultrices fermentum. Ut aliquam, arcu nec consectetur hendrerit, risus eros sagittis metus, a 
@@ -45,35 +46,36 @@ echo "
 .............................................
 "
 
-echo "${YELLOW}[TEST 1] Wrong pid${RESET} --> Should return error"
+echo "${YELLOW}[TEST 1] Wrong pid${RESET} --> Should return error${BOLD}"
 ./client 0 "Wrong pid"
 echo
 
-echo "${YELLOW}[TEST 2] Correct pid with characters${RESET} --> Should return error"
+echo "${YELLOW}[TEST 2] Correct pid with characters${RESET} --> Should return error${BOLD}"
 ./client "$ARG/a" "Wrong pid"
 echo
 
-echo "${YELLOW}[TEST 3] Null pid${RESET} --> Should return error"
+echo "${YELLOW}[TEST 3] Null pid${RESET} --> Should return error${BOLD}"
 ./client "" "Wrong pid"
 echo
 
-echo "${YELLOW}[TEST 4] Test with 8 characters${RESET} --> Server should return string"
+echo "${YELLOW}[TEST 4] Test with 8 characters${RESET} --> Server should return string${BOLD}"
 ./client $ARG "Hello 42"
 echo
 
-echo "${YELLOW}[TEST 4] Test with Unicode characters${RESET} --> Server should return string"
+echo "${YELLOW}[TEST 4] Test with Unicode characters${RESET} --> Server should return string${BOLD}"
 ./client $ARG "©¶Øî😃"
 echo
 
-echo "${YELLOW}[TEST 5] Test with 100 characters${RESET} --> Server should return string"
-./client $ARG "$cien"
+
+echo  "${YELLOW}[TEST 5] Test with 100 characters${RESET} --> Server should return string${GREEN}
+`{ time ./client $ARG "$cien"; } 2>time.txt`${RESET} \t Execution time: `
+cat $TIME | grep real | awk '{print $2}'`"
 echo
 
-echo "${YELLOW}[TEST 6] Test with 1000 characters${RESET} --> Server should return string"
-./client $ARG "$mil"
-echo
 
-#echo "${YELLOW}[TEST 1] Custom${RESET}"
-#./client $ARG "a"; 2>&1
-#echo
+echo  "${YELLOW}[TEST 6] Test with 1000 characters${RESET} --> Server should return string${GREEN}
+`{ time ./client $ARG "$mil"; } 2>time.txt`${RESET} \t Execution time: `
+cat $TIME  | grep real | awk '{print $2}'`"
+echo
+rm $TIME 
 
