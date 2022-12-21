@@ -1,6 +1,7 @@
 #!/bin/bash
 
-ARG=$(pidof ./server)
+#ARG=$(pidof ./server)
+ARG=$(pgre -u ecabanas server)
 cien="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut in nulla sed orci sagittis lacinia vel ac orci. Proin 
 finibus semper tellus, nec vestibulum libero hendrerit nec. Integer vitae massa at est lobortis pulvinar at eget leo. 
 Nullam eu mauris in dolor ultrices fermentum. Ut aliquam, arcu nec consectetur hendrerit, risus eros sagittis metus, a 
