@@ -6,7 +6,7 @@
 /*   By: ecabanas <ecabanas@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 09:52:37 by ecabanas          #+#    #+#             */
-/*   Updated: 2022/12/20 09:52:43 by ecabanas         ###   ########.fr       */
+/*   Updated: 2022/12/21 18:26:49 by ecabanas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,6 @@ void	init_sig(int sig, void (*handler)(int, siginfo_t *, void *))
 	act.sa_sigaction = handler;
 	act.sa_flags = SA_SIGINFO;
 	if (sig != SIGUSR1 && sig != SIGUSR2)
-		err_message("(init_sig) - Signal received is neither SIGUSR1 or SIGUSR2)");
+		err_message("(init_sig) - Signal != SIGUSR1 or SIGUSR2)");
 	sigaction(sig, &act, NULL);
 }
