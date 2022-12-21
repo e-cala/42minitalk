@@ -39,30 +39,40 @@ RESET="\033[0;0m"
 echo "
 .............................................
 .               STARTING TESTS              .
+.                 server PID:               .
+.                   ${GREEN} [$ARG] ${RESET}
 .............................................
 "
 
 echo "${YELLOW}[TEST 1] Wrong pid${RESET} --> Should return error"
-./client 0 "Wrong pid"; 2>&1
+./client 0 "Wrong pid"
 echo
 
 echo "${YELLOW}[TEST 2] Correct pid with characters${RESET} --> Should return error"
-./client "$ARG/a" "Wrong pid"; 2>&1
+./client "$ARG/a" "Wrong pid"
 echo
 
 echo "${YELLOW}[TEST 3] Null pid${RESET} --> Should return error"
-./client "" "Wrong pid"; 2>&1
+./client "" "Wrong pid"
 echo
 
 echo "${YELLOW}[TEST 4] Test with 8 characters${RESET} --> Server should return string"
-./client $ARG "Hello 42"; 2>&1
+./client $ARG "Hello 42"
+echo
+
+echo "${YELLOW}[TEST 4] Test with Unicode characters${RESET} --> Server should return string"
+./client $ARG "©¶Øî😃"
 echo
 
 echo "${YELLOW}[TEST 5] Test with 100 characters${RESET} --> Server should return string"
-./client $ARG "$cien"; 2>&1
+./client $ARG "$cien"
 echo
 
 echo "${YELLOW}[TEST 6] Test with 1000 characters${RESET} --> Server should return string"
-./client $ARG "$mil"; 2>&1
+./client $ARG "$mil"
 echo
+
+#echo "${YELLOW}[TEST 1] Custom${RESET}"
+#./client $ARG "a"; 2>&1
+#echo
 

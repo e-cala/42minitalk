@@ -12,7 +12,7 @@
 
 #include "../includes/minitalk.h"
 
-void	my_handler(int sig, siginfo_t *info, void *context)
+void	message_handler(int sig, siginfo_t *info, void *context)
 {
 	static unsigned char	c;
 	static size_t			size;
@@ -51,28 +51,10 @@ static void	show_pid(void)
 
 int	main(void)
 {
-	init_sig(SIGUSR1, &my_handler);
-	init_sig(SIGUSR2, &my_handler);
+	init_sig(SIGUSR1, &message_handler);
+	init_sig(SIGUSR2, &message_handler);
 	show_pid();
 	while (1)
-		sleep(1);
-}
-
-/* int	main(void)
-{
-	struct sigaction	act;
-
-	show_pid();
-	act.sa_sigaction = my_handler;
-	act.sa_flags = SA_SIGINFO;
-	while (1)
-	{
-		if (sigaction(SIGUSR1, &act, NULL) < 0 || sigaction(SIGUSR2, &act, NULL) < 0)
-		{
-			ft_putendl_fd("An error has ocurred", 1);
-			exit(EXIT_FAILURE);
-		}
 		pause();
-	}
 	return (0);
-} */
+}
