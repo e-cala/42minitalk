@@ -30,10 +30,11 @@ all: libft server client
 libft:
 	make -C libft
 
-
+-include $(DEPS)
 server: $(OBJ_SERVER) $(HEADER)
 	$(CC) $(CFLAGS) -I $(HEADER) $(OBJ_SERVER) $(AFLAGS) -o $@
 
+-include $(DEPS)
 client: $(OBJ_CLIENT) $(HEADER)
 	$(CC) $(CFLAGS) -I $(HEADER) $(OBJ_CLIENT) $(AFLAGS) -o $@
 
