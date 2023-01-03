@@ -6,7 +6,7 @@
 /*   By: ecabanas <ecabanas@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 12:05:24 by ecabanas          #+#    #+#             */
-/*   Updated: 2023/01/03 12:05:26 by ecabanas         ###   ########.fr       */
+/*   Updated: 2023/01/03 12:32:14 by ecabanas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,8 @@ void	message_handler(int sig, siginfo_t *info, void *context)
 		if (!c)
 		{
 			ft_putchar_fd('\n', 1);
-			kill(info->si_pid, SIGUSR1);
+			if (kill(info->si_pid, SIGUSR1) == -1)
+				err_message("non existant pid");
 		}
 		ft_putchar_fd(c, 1);
 		size = 8;
@@ -49,8 +50,11 @@ static void	show_pid(void)
 	ft_putchar_fd('\n', 1);
 }
 
-int	main(void)
+int	main(int argc, char *argv[])
 {
+	(void) argv;
+	if (argc != 1)
+		err_message("argc != 1");
 	init_sig(SIGUSR1, &message_handler);
 	init_sig(SIGUSR2, &message_handler);
 	show_pid();

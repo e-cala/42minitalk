@@ -6,7 +6,7 @@
 #    By: ecabanas <ecabanas@student.42barcel>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/02 12:15:19 by ecabanas          #+#    #+#              #
-#    Updated: 2022/12/21 20:02:05 by ecabanas         ###   ########.fr        #
+#    Updated: 2023/01/03 12:19:23 by ecabanas         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -51,4 +51,4 @@ tests: server client
 
 re: fclean all
 
-.PHONY: libft all clean fclean re
+.PHONY: libft all clean fclean re tests

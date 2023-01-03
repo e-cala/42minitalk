@@ -6,11 +6,23 @@
 /*   By: ecabanas <ecabanas@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 12:05:05 by ecabanas          #+#    #+#             */
-/*   Updated: 2023/01/03 12:05:08 by ecabanas         ###   ########.fr       */
+/*   Updated: 2023/01/03 13:03:55 by ecabanas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minitalk.h"
+
+static int	print_speed(size_t str)
+{
+	int	i;
+
+	i = 0;
+	if (str < 1000)
+		i = 30;
+	else if (str >= 1000)
+		i = 300;
+	return (i);
+}
 
 static void	encode(int pid, char *str)
 {
@@ -27,10 +39,16 @@ static void	encode(int pid, char *str)
 		{
 			bits--;
 			if (((unsigned char)str[i] >> bits & 1) == 1)
-				kill(pid, SIGUSR1);
+			{
+				if (kill(pid, SIGUSR1) == -1)
+					err_message("non existant pid");
+			}
 			else if (((unsigned char)str[i] >> bits & 1) == 0)
-				kill(pid, SIGUSR2);
-			usleep(30);
+			{
+				if (kill(pid, SIGUSR2) == -1)
+					err_message("non existant pid");
+			}
+			usleep(print_speed(len));
 		}
 		i++;
 	}
@@ -55,6 +73,8 @@ int	main(int argc, char *argv[])
 		err_message("Wrong pid argument");
 	if (!pid)
 		err_message("pid not provided");
+	if (ft_strlen(argv[2]) == 0)
+		err_message("NULL string");
 	init_sig(SIGUSR1, &confirmation_handler);
 	encode(pid, argv[2]);
 	while (1)
