@@ -22,10 +22,11 @@ void	err_message(char *str)
 void	init_sig(int sig, void (*handler)(int, siginfo_t *, void *))
 {
 	struct sigaction	act;
-
-	sigemptyset(&act.sa_mask);
+	
+	ft_memset(&act, '\0', sizeof(act));
 	act.sa_sigaction = handler;
-	act.sa_flags = SA_SIGINFO;
+	act.sa_flags =  SA_SIGINFO;
+	sigemptyset(&act.sa_mask);
 	if (sig != SIGUSR1 && sig != SIGUSR2)
 		err_message("(init_sig) - Signal != SIGUSR1 or SIGUSR2)");
 	sigaction(sig, &act, NULL);
