@@ -6,7 +6,7 @@
 /*   By: ecabanas <ecabanas@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 12:05:05 by ecabanas          #+#    #+#             */
-/*   Updated: 2023/01/03 13:03:55 by ecabanas         ###   ########.fr       */
+/*   Updated: 2023/01/04 11:07:47 by ecabanas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,12 @@ static int	print_speed(size_t str)
 	i = 0;
 	if (str < 1000)
 		i = 30;
-	else if (str >= 1000)
-		i = 300;
+	else if (str < 10000)
+		i = 50;
+	else if (str < 50000)
+		i = 150;
+	else if (str >= 50000)
+		i = 1000;
 	return (i);
 }
 
@@ -39,15 +43,9 @@ static void	encode(int pid, char *str)
 		{
 			bits--;
 			if (((unsigned char)str[i] >> bits & 1) == 1)
-			{
-				if (kill(pid, SIGUSR1) == -1)
-					err_message("non existant pid");
-			}
+				tern_int(kill(pid, SIGUSR1) == -1, "non existant pid");
 			else if (((unsigned char)str[i] >> bits & 1) == 0)
-			{
-				if (kill(pid, SIGUSR2) == -1)
-					err_message("non existant pid");
-			}
+				tern_int(kill(pid, SIGUSR2) == -1, "non existant pid");
 			usleep(print_speed(len));
 		}
 		i++;
@@ -67,14 +65,10 @@ int	main(int argc, char *argv[])
 {
 	pid_t	pid;
 
-	if (argc != 3)
-		err_message("argc != 3. Check that the server is running.");
-	if (!ft_atoi(argv[1], &pid))
-		err_message("Wrong pid argument");
-	if (!pid)
-		err_message("pid not provided");
-	if (ft_strlen(argv[2]) == 0)
-		err_message("NULL string");
+	tern_int(argc != 3, "argc != 3. Check that the server is running.");
+	tern_int(!ft_atoi(argv[1], &pid), "Wrong pid argument");
+	tern_int(!pid, "pid not provided");
+	tern_int(ft_strlen(argv[2]) == 0, "NULL string");
 	init_sig(SIGUSR1, &confirmation_handler);
 	encode(pid, argv[2]);
 	while (1)
